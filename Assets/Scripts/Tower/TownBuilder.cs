@@ -13,16 +13,11 @@ public class TownBuilder : MonoBehaviour
 
     private float _startAndFinishAdditionalScale = 1f;
 
-    public float BeamScaleY => _levelCount / 7f + _startAndFinishAdditionalScale - _additionalScale / 8f;
+    public float BeamScaleY => _levelCount / 25f + _startAndFinishAdditionalScale - _additionalScale / 8f;
 
-    private void Start()
+    private void Awake()
     {
         Build();
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void Build()
@@ -43,7 +38,7 @@ public class TownBuilder : MonoBehaviour
     private void SpawnPlatform(Platform platform, ref Vector3 spawnPosition, Transform parent)
     {
         Instantiate(platform, spawnPosition, Quaternion.Euler(0, Random.Range(0, 360), 0), parent);
-        spawnPosition.y -= 1f;
+        spawnPosition.y -= 1.5f;
     }
 
 }
