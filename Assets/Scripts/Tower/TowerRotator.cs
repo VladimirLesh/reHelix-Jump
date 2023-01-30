@@ -8,10 +8,12 @@ public class TowerRotator : MonoBehaviour
 {
     [SerializeField] private float _rotateSpeed;
     private Rigidbody _rigidbody;
+    private Camera _camera;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -23,6 +25,24 @@ public class TowerRotator : MonoBehaviour
             {
                 float torque = touch.deltaPosition.x * Time.deltaTime * _rotateSpeed;
                 _rigidbody.AddTorque(Vector3.up * -torque);
+            }
+        }
+        
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 mousePosition = _camera.ScreenToViewportPoint(Input.mousePosition);
+                
+            Debug.Log(mousePosition);
+            float torque = Time.deltaTime * _rotateSpeed;
+
+            if (mousePosition.x < 0.5f)
+            {
+                _rigidbody.AddTorque(Vector3.up * torque);
+            }
+            else
+            {
+                _rigidbody.AddTorque(Vector3.up * -torque);
+
             }
         }
     }
